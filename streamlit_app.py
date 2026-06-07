@@ -22,11 +22,18 @@ def inject_widget(html_content: str) -> str:
 if html_path.exists():
     html = html_path.read_text(encoding="utf-8")
     html = inject_widget(html)
-    st.components.v1.html(html, height=900, scrolling=True)
+    # Allow JavaScript execution so the widget can run
+    st.components.v1.html(html, height=900, scrolling=True, unsafe_allow_javascript=True)
 else:
     # Fallback minimal page containing the widget script
     fallback = (
         "<!doctype html><html><head><meta charset=\"utf-8\"></head>"
         "<body><h3>Embedded widget</h3>" + widget_script + "</body></html>"
     )
-    st.components.v1.html(fallback, height=600, scrolling=True)
+    st.components.v1.html(fallback, height=600, scrolling=True, unsafe_allow_javascript=True)
+
+# Warn if the widget or API URL still point to localhost (won't work when deployed)
+if "localhost" in widget_script:
+    st.warning(
+        "The widget script or API is using localhost. This will only work when testing locally; deploy the widget JS and API to public URLs for a deployed Streamlit app."
+    )

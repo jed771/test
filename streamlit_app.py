@@ -7,7 +7,7 @@ st.set_page_config(page_title="My Internship Project", layout="wide")
 # Allow configuring backend and widget JS via environment variables
 backend_url = os.getenv("BACKEND_URL", "http://localhost:8000")
 # Default widget JS src to the user's localhost port 8080 widget URL per request
-widget_js_url = os.getenv("WIDGET_JS_URL", "http://localhost:8080/widget-embed.js")
+widget_js_url = os.getenv("WIDGET_JS_URL", "https://jed771.github.io/test/widget-embed.js")
 
 html_path = Path(__file__).parent / "index.html"
 # Build the widget script using the configured URLs

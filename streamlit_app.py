@@ -26,6 +26,9 @@ def inject_widget(html_content: str) -> str:
     return html_content + widget_script
 
 
+st.info(f"Using widget JS: {widget_js_url}")
+st.info(f"Using backend URL: {backend_url}")
+
 if html_path.exists():
     html = html_path.read_text(encoding="utf-8")
     html = inject_widget(html)
